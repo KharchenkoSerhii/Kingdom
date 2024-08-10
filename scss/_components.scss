@@ -1,0 +1,240 @@
+// ========================================================================================
+// Обобщенные блоки заголовки и т.д. ======================================================
+
+// ------ шапка блока-------
+.block-top {
+	display: grid;
+	gap: toRem(20);
+	justify-items: start;
+
+	&--center {
+		justify-items: center;
+	}
+	&--white {
+		color: $color_font_2;
+	}
+	// .block-top__label
+	&__label {
+		line-height: 1.56;
+		text-transform: capitalize;
+	}
+	// .block-top__title
+	&__title {
+		// font-size: toRem(48);
+		@include adaptiveValue("font-size", 48, 42);
+		line-height: 1.2; 
+		text-transform: capitalize;
+		color: $color_font_title;
+		font-family: $fontFamily_2;
+	}
+	// .block-top__sub-text
+	&__sub-text {
+		line-height: 1.56;
+		font-style: italic;
+	}
+	// .block-top__text
+	&__text {
+		line-height: 1.56;
+	}
+	// .block-top__button
+	&__button {
+	}
+}
+
+.button {
+	position: relative;
+	z-index: 5;
+	// background-color: #fff;
+	display: inline-flex;
+	justify-content: center;
+	padding: toRem(15) toRem(43);
+	border-radius: toRem(25);
+	overflow: hidden;
+	color: $color_font_title;
+	& span {
+		position: relative;
+		color: $color_font;
+		font-weight: 300;
+		z-index: 2;
+	}
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: url("../img/button/bg-button.jpg") center no-repeat;
+		background-size: cover;
+		// opacity: 0.6;
+		filter: brightness(1.5) contrast(0.4) saturate(0.6) sepia(90%);
+		transition: all 0.5s ease;
+	}
+}
+
+.button--border {
+	background-color: transparent;
+	border: $color_bg_gold 1px solid;
+	&:before {
+		opacity: 0;
+	}
+	& span {
+		transition: all 0.5s ease;
+		color: $color_bg_gold;
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			border: transparent 1px solid;
+			// border: transparent 1px solid;
+		}
+	}
+}
+
+.button:hover {
+	@media (any-hover: hover) {
+		&::before {
+			opacity: 1;
+			filter: brightness(1) contrast(1) saturate(1) sepia(0%);
+			// border: transparent 1px solid;
+		}
+		& span {
+			color: $color_font;
+		}
+	}
+}
+
+// ------ шапка блока-------
+
+// Обобщенные блоки заголовки и т.д. ======================================================
+// ========================================================================================
+
+// ========================================================================================
+// Класс ibg--------------------------------------------------------
+// .ibg {
+// 	background-position: center;
+// 	background-size: cover;
+// 	background-repeat: no-repeat;
+// 	position: relative;
+
+// 	img {
+// 		display: none;
+// 	}
+// }
+// Класс ibg--------------------------------------------------------
+// ========================================================================================
+
+// ========================================================================================
+// Счетчик для списка-----------------------------------------------
+
+// %listCounter {
+// 	list-style-type: none;
+// 	counter-reset: item;
+// 	li {
+// 		position: relative;
+// 		&:before {
+// 			counter-increment: item;
+// 			content: counter(item) ".";
+// 			position: absolute;
+// 			left: 0;
+// 			top: 0;
+// 		}
+// 	}
+// }
+
+// вызов в классе  ---  @extend %listCounter;
+// Счетчик для списка-----------------------------------------------
+// ========================================================================================
+
+// ========================================================================================
+// SPOLLERS---------------------------------------
+// Базовые стили спойлеров
+// Сниппет (HTML): spoller
+
+// Блок со спойлерами
+// .spollers {
+// 	display: grid;
+// 	gap: toRem(12);
+// }
+// Спойлер
+// .spollers__item {
+// 	border-radius: toRem(12);
+// 	overflow: hidden;
+// 	padding: toRem(24) toRem(32) toRem(24) toRem(32);
+// 	transition: all 0.5s ease;
+// 	@media (max-width: $mobileSmall) {
+// 			padding: toRem(16) toRem(16);
+// 	}
+// }
+// .spollers__item._spoller-item-active {
+// 	background-color: #f3f5f9;
+// 	transition: all 0.5s ease;
+// }
+// Заголовок спойлера
+// .spollers__title {
+// 	width: 100%;
+// 	cursor: default;
+// 	text-align: left;
+// 	padding: toRem(0) toRem(40) toRem(0) toRem(0);
+// 	position: relative;
+// 	@include adaptiveValue("font-size", 24, 20);
+// 	font-weight: 700;
+// 	color: $mainColor;
+// 	font-family: inherit;
+// 	background-color: transparent;
+// 	transition: all 0.5s ease;
+
+// 	._spoller-init & {
+// 		cursor: pointer;
+
+// 		&::before,
+// 		&::after {
+// 			content: "";
+// 			position: absolute;
+// 			right: toRem(0);
+// 			top: 50%;
+// 			background-color: $bgColorSemi;
+// 			height: 2px;
+// 			width: 15px;
+// 			transition: transform 0.5s ease 0s;
+// 		}
+
+// 		&::before {
+// 			transform: translate(-75%, -50%) rotate(40deg);
+// 		}
+
+// 		&::after {
+// 			transform: translate(0, -50%) rotate(-40deg);
+// 		}
+
+// 		&._spoller-active {
+// 			&::before {
+// 				transform: translateX(-75%) rotate(-40deg);
+// 			}
+
+// 			&::after {
+// 				transform: rotate(40deg);
+// 			}
+// 		}
+// 	}
+// }
+// Контент спойлера
+// .spollers__body {
+// 	padding: toRem(16) toRem(0) toRem(0) toRem(0);
+// 	font-size: toRem(16);
+// 	line-height: 1.5;
+// }
+// SPOLLERS---------------------------------------
+// ========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+

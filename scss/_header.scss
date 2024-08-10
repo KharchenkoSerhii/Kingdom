@@ -1,0 +1,277 @@
+// ========================================================================================
+// HEADER==================================================================================
+
+.header {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 50;
+	@include adaptiveValue("padding-top", 32, 8);
+	@include adaptiveValue("padding-bottom", 32, 8);
+	transition: backdrop-filter 0.8s ease; /* добавляем transition для плавного перехода */
+	// backdrop-filter: blur(30px);
+	// border: 1px solid red;
+
+	&.headerScroll {
+		backdrop-filter: blur(30px);
+		@include adaptiveValue("padding-top", 12, 8);
+		@include adaptiveValue("padding-bottom", 12, 8);
+		&:before {
+			content: "";
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			// @include adaptiveValue("height", 155, 78);
+			top: 0;
+			left: 0;
+			// position: fixed;
+			background-color: rgba(61, 47, 30, 0.7);
+			z-index: 3;
+			// transition: all 0.3s ease;
+		}
+	}
+
+	// .header__container
+	&__container {
+	}
+	// .header__body
+	&__body {
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
+		align-items: center;
+		gap: toRem(40);
+		@media (max-width: $mobile) {
+			display: flex;
+			justify-content: space-between;
+			gap: toRem(0);
+		}
+	}
+	// .header__menu
+	&__menu {
+	}
+	// .header__logo
+	&__logo {
+	}
+	// .header__action
+	&__action {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: end;
+		@include adaptiveValue("column-gap", 48, 20);
+		row-gap: toRem(16);
+		@media (max-width: $mobile) {
+			// width: 100%;
+			justify-content: center;
+		}
+	}
+}
+
+.menu {
+	// .menu__burger
+	&__burger {
+	}
+	// .menu__body
+	&__body {
+		@media (max-width: $mobile) {
+			position: fixed;
+			top: 0;
+			left: -100%;
+			// right: -100%;
+			// right: 0;
+			width: 100%;
+			height: 100vh;
+			z-index: 3;
+			overflow: auto; // позволяет прокручиваться пунктам меню если они выходят за пределы экрана
+			background-color: $color_bg_gold;
+			padding: toRem(120) toRem(15) toRem(30) toRem(15);
+			transition: all 0.3s ease;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+			&:before {
+				content: "";
+				width: 100%;
+				@include adaptiveValue("height", 155, 78);
+				top: 0;
+				left: -100%;
+				position: fixed;
+				background-color: $color_bg_gold;
+				z-index: 5;
+				transition: all 0.3s ease;
+			}
+		}
+		&.menu-open {
+			left: 0;
+			&::before {
+				left: 0;
+			}
+		}
+	}
+	// .menu__list
+	&__list {
+		display: flex;
+		@include adaptiveValue("column-gap", 48, 20);
+		flex-wrap: wrap;
+		row-gap: toRem(16);
+		@media (max-width: $mobile) {
+			flex-direction: column;
+			align-items: center;
+			row-gap: toRem(30);
+			margin-bottom: toRem(40);
+		}
+	}
+	// .menu__item
+	&__item {
+	}
+	// .menu__link
+	&__link {
+		position: relative;
+		z-index: 4;
+		color: $color_bg_gold;
+		transition: all 0.5s;
+		@media (max-width: $mobile) {
+			color: $color_font_2;
+			font-size: toRem(28);
+		}
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: underline;
+				text-shadow: 0 10px 10px $color_bg_gold;
+				@media (max-width: $mobile) {
+					text-shadow: 0 10px 10px $color_font_2;
+				}
+			}
+		}
+	}
+}
+
+.logo-header {
+	& svg {
+		@include adaptiveValue("width", 217, 100);
+		position: relative;
+		z-index: 3;
+		transition: all 0.8s ease;
+		& path {
+			transition: all 0.3s ease;
+		}
+	}
+	@media (max-width: $mobile) {
+		width: 100%;
+	}
+	.headerScroll & {
+		& svg {
+			@include adaptiveValue("width", 150, 100);
+		}
+	}
+}
+.logo-header.menu-open {
+	& svg {
+		& path {
+			fill: $color_font_2;
+		}
+	}
+}
+
+.action-header {
+	position: relative;
+	z-index: 4;
+	// .action-header__link
+	&__link {
+		color: $color_bg_gold;
+		@media (max-width: $mobile) {
+			position: relative;
+			z-index: 2;
+			color: $color_font_2;
+		}
+		transition: all 0.5s;
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: underline;
+				text-shadow: 0 10px 10px $color_bg_gold;
+			}
+		}
+	}
+	// .action-header__btn
+	&__btn {
+		@media (max-width: $tablet) {
+			// padding: toRem(10) toRem(40);
+		}
+		@media (max-width: $mobile) {
+			border: $color_font_2 1px solid;
+			&:hover {
+				@media (any-hover: hover) {
+					&::before {
+						opacity: 0.6;
+					}
+				}
+			}
+		}
+		& span {
+			color: $color_bg_gold;
+			@media (max-width: $mobile) {
+				color: $color_font_2;
+			}
+		}
+	}
+}
+
+.burger-menu {
+	display: none;
+	@media (max-width: $mobile) {
+		position: relative;
+		top: 0;
+		left: 0;
+		width: toRem(30);
+		height: toRem(18);
+		z-index: 20;
+		display: block;
+		cursor: pointer;
+
+		& span {
+			// content: "";
+			position: absolute;
+			left: 0;
+			background-color: $color_bg_gold;
+			width: 100%;
+			height: toRem(3);
+			transition: all 0.3s ease 0s; // для плавного превращения в крестик
+			border-radius: toRem(1.5);
+		}
+		& span:nth-child(1) {
+			top: 0;
+		}
+		& span:nth-child(2) {
+			top: 50%;
+			transform: translate(0, -50%);
+		}
+		& span:nth-child(3) {
+			bottom: 0;
+		}
+
+		//.burger-menu.menu-open
+		&.menu-open {
+			& span {
+				background-color: $color_font_2;
+			}
+			& span:nth-child(2) {
+				transform: scale(0);
+			}
+			& span:nth-child(1) {
+				transform: translate(0, -50%) rotate(-45deg);
+				top: 50%;
+				transition: transform 0.3s ease; // сглаживает центрование элемента (translate + rotate)
+			}
+			& span:nth-child(3) {
+				bottom: 50%;
+				transform: translate(0, 50%) rotate(45deg);
+				transition: transform 0.3s ease; // сглаживает центрование элемента (translate + rotate)
+			}
+		}
+	}
+}
+
+// burger------------------------
+// HEADER==================================================================================
+// ========================================================================================
